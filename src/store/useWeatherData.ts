@@ -1,43 +1,64 @@
 import { create } from 'zustand';
+const API_KEY = import.meta.env.VITE_GEOLOCATION_API_KEY;
 
-interface IWeatherData {
-    weather: [
-        {
-            main: string;
-            description: string;
-        }
-    ];
-    main: {
-        temp: number;
-        feels_like: number;
-        temp_min: number;
-        temp_max: number;
-        pressure: number;
-        humidity: number;
-    };
-    visibility: number;
-    wind: {
-        speed: number;
-        deg: number;
-    };
-    sys: {
-        sunrise: number;
-        sunset: number;
-    };
-    name: string;
-    timezone: number;
+interface ICurrentWeather {
+    apparent_temperature: number;
+    cloud_cover: number;
+    is_day: number;
+    relative_humidity_2m: number;
+    temperature_2m: number;
+    time: string;
+    weather_code: number;
+    wind_direction_10m: number;
+    wind_speed_10m: number;
 }
 
-interface ICityLonAndLat {
+interface IDailyWeather {
+    precipitation_probability_max: number[];
+    sunrise: string[];
+    sunset: string[];
+    temperature_2m_max: number[];
+    temperature_2m_min: number[];
+    time: string[];
+    uv_index_max: number[];
+    weather_code: number[];
+}
+
+interface IHourlyWeather {
+    precipitation: number[][];
+    precipitation_probability: number[][];
+    temperature_2m: number[][];
+    time: string[][];
+    uv_index: number[][];
+    weather_code: number[][];
+}
+
+interface IWeather {
+    current: ICurrentWeather;
+    daily: IDailyWeather;
+    hourly: IHourlyWeather;
+}
+
+interface ILocationLatAndLon {
     lon: number;
     lat: number;
 }
 
+interface ILocationName {
+    address: {
+        city?: string;
+        town?: string;
+        village?: string;
+        county: string;
+    };
+}
+
 interface IWeatherStore {
-    weatherData: IWeatherData | null;
+    weatherData: IWeather | null;
     loading: boolean;
     error: string | null;
-    fetchWeatherData: (city?: string) => Promise<void>;
+    locationName: string | null;
+    fetchWeatherData: (location?: string) => Promise<void>;
 }
 
 const geolocationError = (
@@ -68,12 +89,11 @@ const geolocationError = (
 };
 
 const fetchWeatherDataByCoords = async (
-    API_KEY: string,
     lat: number,
     lon: number
-): Promise<IWeatherData> => {
+): Promise<IWeather> => {
     const response = await fetch(
-        `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`
+        `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,apparent_temperature,is_day,weather_code,cloud_cover,wind_speed_10m,wind_direction_10m&hourly=temperature_2m,precipitation_probability,precipitation,weather_code,uv_index&daily=weather_code,temperature_2m_max,temperature_2m_min,sunrise,sunset,uv_index_max,uv_index_clear_sky_max,precipitation_probability_max&timezone=auto`
     );
 
     if (!response.ok) {
@@ -91,54 +111,81 @@ const getCurrentPosition = (): Promise<GeolocationPosition> => {
     });
 };
 
+const getLocationName = async (lat: number, lon: number): Promise<string> => {
+    const response = await fetch(
+        `https://us1.locationiq.com/v1/reverse?key=${API_KEY}=${lat}&lon=${lon}&format=json&accept-language=en`
+    );
+
+    if (!response.ok) {
+        throw new Error(
+            `HTTP error! status: ${response.status} ${response.statusText}. Failed to get location name`
+        );
+    }
+
+    const locationData: ILocationName = await response.json();
+
+    return (
+        locationData.address.city ||
+        locationData.address.town ||
+        locationData.address.village ||
+        locationData.address.county
+    );
+};
+
 const useWeatherData = create<IWeatherStore>((set) => ({
     weatherData: null,
     loading: false,
     error: null,
-    fetchWeatherData: async (city: string | undefined) => {
+    locationName: null,
+    fetchWeatherData: async (location: string | undefined) => {
         set({ loading: true, error: null });
 
-        const API_KEY = import.meta.env.VITE_WEATHER_API_KEY;
-
         try {
-            if (city) {
+            if (location) {
                 const response = await fetch(
-                    `http://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${API_KEY}&units=metric`
+                    `https://us1.locationiq.com/v1/search?key=${API_KEY}&q=${location}&format=json&`
                 );
 
                 if (!response.ok) {
                     throw new Error(
-                        `Weather API error: ${response.status} ${response.statusText}`
+                        `Weather API error: ${response.status} ${response.statusText}. Unable to determine location`
                     );
                 }
 
-                const cityLonAndLat: ICityLonAndLat[] = await response.json();
+                const locationLatAndLon: ILocationLatAndLon[] =
+                    await response.json();
 
-                if (!cityLonAndLat || !cityLonAndLat.length)
-                    throw new Error('City not found. Please check the name.');
+                if (!locationLatAndLon || !locationLatAndLon.length)
+                    throw new Error(
+                        'Location not found. Please check the location name.'
+                    );
 
-                const { lat, lon } = cityLonAndLat[0];
+                const { lat, lon } = locationLatAndLon[0];
 
-                const weatherData = await fetchWeatherDataByCoords(
-                    API_KEY,
-                    lat,
-                    lon
-                );
+                const weatherData = await fetchWeatherDataByCoords(lat, lon);
 
-                set({ loading: false, weatherData });
+                set({
+                    loading: false,
+                    weatherData,
+                    locationName: location,
+                });
             } else if (navigator.geolocation) {
                 try {
                     const geoData = await getCurrentPosition();
 
                     const { latitude, longitude } = geoData.coords;
 
-                    const weatherData = await fetchWeatherDataByCoords(
-                        API_KEY,
+                    const locationName = await getLocationName(
                         latitude,
                         longitude
                     );
 
-                    set({ loading: false, weatherData });
+                    const weatherData = await fetchWeatherDataByCoords(
+                        latitude,
+                        longitude
+                    );
+
+                    set({ loading: false, weatherData, locationName });
                 } catch (error) {
                     if (error instanceof GeolocationPositionError) {
                         geolocationError(error, set);
@@ -148,7 +195,7 @@ const useWeatherData = create<IWeatherStore>((set) => ({
                 }
             } else {
                 throw new Error(
-                    'Unable to determine your location. Enter your city in the search field.'
+                    'Unable to determine your location. Enter your location in the search field.'
                 );
             }
         } catch (error) {
