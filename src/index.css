@@ -1,64 +1,11 @@
+@import "tailwindcss/preflight.css"layer(base);
 @import "tailwindcss";
-/* @import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&display=swap"); */
-
-html {
-  box-sizing: border-box;
-}
-
-*,
-*::after,
-*::before {
-  box-sizing: inherit;
-  user-select: none;
-  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
-  padding: 0;
-  margin: 0;
-}
-
-*:focus {
-  outline: none;
-}
-
-*:focus-visible {
-  outline: 2px solid #fff;
-}
-
-ul,
-li,
-dl {
-  list-style-type: none;
-}
-
-a, a:hover {
-  text-decoration: none;
-  color: inherit;
-  display: inline-block;
-}
-
-input {
-  outline: none;
-}
-
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-img {
-  max-width: 100%;
-}
-
-button {
-  background: none;
-  border: none;
-}
 
 body {
-  font-family: "Lato", sans-serif;
+  font-family: "Quicksand", sans-serif;
   color: #fff;
   font-size: 1rem;
   line-height: 1.2;
   font-weight: 400;
-  background-color: #1e242e;
+  background-color: #32353a;
 }
