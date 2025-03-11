@@ -212,5 +212,7 @@ export const selectFetchWeatherData = (state: IWeatherStore) =>
 export const selectWeatherData = (state: IWeatherStore) => state.weatherData;
 export const selectWeatherLoading = (state: IWeatherStore) => state.loading;
 export const selectWeatherError = (state: IWeatherStore) => state.error;
+export const selectWeatherLocationName = (state: IWeatherStore) =>
+    state.locationName;
 
 export default useWeatherData;
