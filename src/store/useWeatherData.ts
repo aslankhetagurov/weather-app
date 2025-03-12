@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import { TWeatherCode } from '../types/TWeatherCode';
 const API_KEY = import.meta.env.VITE_GEOLOCATION_API_KEY;
 
 interface ICurrentWeather {
@@ -8,7 +9,7 @@ interface ICurrentWeather {
     relative_humidity_2m: number;
     temperature_2m: number;
     time: string;
-    weather_code: number;
+    weather_code: TWeatherCode;
     wind_direction_10m: number;
     wind_speed_10m: number;
 }
@@ -21,7 +22,7 @@ interface IDailyWeather {
     temperature_2m_min: number[];
     time: string[];
     uv_index_max: number[];
-    weather_code: number[];
+    weather_code: TWeatherCode[];
 }
 
 interface IHourlyWeather {
@@ -30,7 +31,7 @@ interface IHourlyWeather {
     temperature_2m: number[][];
     time: string[][];
     uv_index: number[][];
-    weather_code: number[][];
+    weather_code: TWeatherCode[][];
 }
 
 interface IWeather {
