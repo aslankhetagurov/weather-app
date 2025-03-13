@@ -34,7 +34,7 @@ interface IHourlyWeather {
     weather_code: TWeatherCode[][];
 }
 
-interface IWeather {
+export interface IWeather {
     current: ICurrentWeather;
     daily: IDailyWeather;
     hourly: IHourlyWeather;
