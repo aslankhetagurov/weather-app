@@ -19,12 +19,12 @@ const CurrentDayTemp = () => {
     }
 
     if (weatherErrorMessage) {
-        return <p className="text-red-400">{weatherErrorMessage}</p>;
+        return <p className="text-red-400 font-bold">{weatherErrorMessage}</p>;
     }
 
     if (!weatherData) {
         return (
-            <p className="text-red-400">
+            <p className="text-red-400 font-bold">
                 Failed to load temperature data. Please try again later.
             </p>
         );
@@ -41,12 +41,12 @@ const CurrentDayTemp = () => {
                 <h3 className="text-5xl font-medium">
                     {formatTemp(currentTemp)}
                 </h3>
-                <div className="text-gray-300 text-[12px] self-end">
+                <div className="text-gray-100 text-[12px] self-end">
                     <p>Real Feel</p>
                     <p>{formatTemp(feelsLike)}</p>
                 </div>
             </div>
-            <p className="text-gray-300">
+            <p className="text-gray-100">
                 {`${formatTemp(minTemp[0]).match(/.?\d+/g)} ~
                     ${formatTemp(maxTemp[0])}`}
             </p>

@@ -40,8 +40,10 @@ const DailyWeatherItem: FC<DailyWeatherItemProps> = ({
                 <CurrentWeatherIcon weatherCode={weatherCode} />
             </span>
             <div className="mr-1.5 text-left overflow-hidden">
-                <p className="truncate">{formatDate(currentDate, date)}</p>
-                <p className="text-gray-400 truncate">
+                <p className="truncate font-bold">
+                    {formatDate(currentDate, date)}
+                </p>
+                <p className="text-gray-100 truncate">
                     {WEATHER_CODES[weatherCode]}
                 </p>
             </div>
@@ -52,7 +54,7 @@ const DailyWeatherItem: FC<DailyWeatherItemProps> = ({
                         <p>{pop}%</p>
                     </div>
                 )}
-                <div className="pl-1.5 border-l-1 border-gray-500 min-w-8 w-8 text-left">
+                <div className="pl-1.5 border-l-1 border-gray-200 min-w-8 w-8 text-left">
                     <p>{formatTemp(tempMax)}</p>
                     <p>{formatTemp(tempMin)}</p>
                 </div>
