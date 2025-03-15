@@ -2,10 +2,12 @@ import { create } from 'zustand';
 import { TWeatherCode } from '../types/TWeatherCode';
 const API_KEY = import.meta.env.VITE_GEOLOCATION_API_KEY;
 
+export type TIsDay = 0 | 1;
+
 interface ICurrentWeather {
     apparent_temperature: number;
     cloud_cover: number;
-    is_day: number;
+    is_day: TIsDay;
     relative_humidity_2m: number;
     temperature_2m: number;
     time: string;
