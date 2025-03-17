@@ -4,22 +4,13 @@ import CurrentWeatherIcon from '../../../../components/CurrentWeatherIcon/Curren
 import { WEATHER_CODES } from '../../../../consts/weatherCodes';
 import { formatTemp } from '../../helpers/formatTemp';
 import { formatDate } from '../../helpers/formatDate';
-import { TWeatherCode } from '../../../../types/TWeatherCode';
-import { BsCloudRain, BsCloudSnow } from 'react-icons/bs';
 import { IWeather } from '../../../../store/useWeatherData';
+import PrecipProbability from '../../../../UI/PrecipProbability';
 
 interface DailyWeatherItemProps {
     index: number;
     weatherData: IWeather;
 }
-
-const precipProbabilityIcon = (weatherCode: TWeatherCode) => {
-    if (WEATHER_CODES[weatherCode].toLowerCase().includes('snow')) {
-        return <BsCloudSnow />;
-    } else {
-        return <BsCloudRain />;
-    }
-};
 
 const DailyWeatherItem: FC<DailyWeatherItemProps> = ({
     weatherData,
@@ -36,9 +27,7 @@ const DailyWeatherItem: FC<DailyWeatherItemProps> = ({
 
     return (
         <li className="flex items-center">
-            <span className="w-8 h-8 min-w-8 rounded-sm bg-white/10 flex justify-center items-center mr-1.5 text-[18px] ">
-                <CurrentWeatherIcon weatherCode={weatherCode} />
-            </span>
+            <CurrentWeatherIcon weatherCode={weatherCode} styles="mr-1.5" />
             <div className="mr-1.5 text-left overflow-hidden">
                 <p className="truncate font-bold">
                     {formatDate(currentDate, date)}
@@ -49,10 +38,11 @@ const DailyWeatherItem: FC<DailyWeatherItemProps> = ({
             </div>
             <div className="ml-auto flex items-center">
                 {!!pop && (
-                    <div className="pr-1.5 min-w-7 w-7 flex flex-col items-center">
-                        <p className="">{precipProbabilityIcon(weatherCode)}</p>
-                        <p>{pop}%</p>
-                    </div>
+                    <PrecipProbability
+                        pop={pop}
+                        weatherCode={weatherCode}
+                        styles="flex-col pr-1.5 min-w-7 w-7 text-blue-500"
+                    />
                 )}
                 <div className="pl-1.5 border-l-1 border-gray-200 min-w-8 w-8 text-left">
                     <p>{formatTemp(tempMax)}</p>
