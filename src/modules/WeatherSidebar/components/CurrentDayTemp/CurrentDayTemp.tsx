@@ -6,7 +6,7 @@ import useWeatherData, {
     selectWeatherLoading,
     selectWeatherLocationName,
 } from '../../../../store/useWeatherData';
-import { formatTemp } from '../../helpers/formatTemp';
+import { formatTemp } from '../../../../helpers/formatTemp';
 
 const CurrentDayTemp = () => {
     const weatherData = useWeatherData(selectWeatherData);

@@ -2,7 +2,7 @@ import { FC } from 'react';
 
 import CurrentWeatherIcon from '../../../../components/CurrentWeatherIcon/CurrentWeatherIcon';
 import { WEATHER_CODES } from '../../../../consts/weatherCodes';
-import { formatTemp } from '../../helpers/formatTemp';
+import { formatTemp } from '../../../../helpers/formatTemp';
 import { formatDate } from '../../helpers/formatDate';
 import { IWeather } from '../../../../store/useWeatherData';
 import PrecipProbability from '../../../../UI/PrecipProbability';
