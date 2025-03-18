@@ -4,7 +4,7 @@ import DailyWeatherList from '../DailyWeatherList/DailyWeatherList';
 
 export const WeatherSidebar = () => {
     return (
-        <section className="w-68 backdrop-blur-lg h-full border-1 rounded-2xl border-white/30 p-5">
+        <section className="min-w-68 max-w-68 backdrop-blur-lg h-full border-1 rounded-2xl border-white/30 p-5">
             <header className="flex max-w-9/10 mx-auto">
                 <img
                     className="mb-2.5 max-w-18"
