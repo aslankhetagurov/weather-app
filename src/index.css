@@ -9,3 +9,12 @@ body {
   font-weight: 400;
   background-color: #32353a;
 }
+
+.hide-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}

@@ -27,13 +27,13 @@ interface IDailyWeather {
     weather_code: TWeatherCode[];
 }
 
-interface IHourlyWeather {
-    precipitation: number[][];
-    precipitation_probability: number[][];
-    temperature_2m: number[][];
-    time: string[][];
-    uv_index: number[][];
-    weather_code: TWeatherCode[][];
+export interface IHourlyWeather {
+    precipitation: number[];
+    precipitation_probability: number[];
+    temperature_2m: number[];
+    time: string[];
+    uv_index: number[];
+    weather_code: TWeatherCode[];
 }
 
 export interface IWeather {
