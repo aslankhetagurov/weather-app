@@ -34,12 +34,12 @@ const HourlyWeatherItem = ({
     };
 
     return (
-        <li className="text-[14px] backdrop-blur-[100px] py-0.5 px-2 rounded-md flex flex-col items-center min-w-18 max-w-18 border-1 border-white/40">
+        <li className="text-[14px] backdrop-blur-lg py-0.5 px-2 rounded-md flex flex-col items-center min-w-18 max-w-18 border-1 border-white/40">
             <p className="mb-1 border-b-1 border-b-gray-300/65 font-bold">
                 {!index ? 'Now' : getHourlyTime()}
             </p>
             <CurrentWeatherIcon weatherCode={weatherCode} styles="mb-1" />
-            <div className="flex flex-col gap-1 pb-1.5 text-amber-300">
+            <div className="flex flex-col gap-1 pb-1.5 text-amber-300 font-bold">
                 <TbUvIndex className="text-xl/0 mx-auto" />
                 <p className="text-[11px]/0">{getUVLevel(uv)}</p>
             </div>
