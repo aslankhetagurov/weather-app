@@ -80,16 +80,21 @@ const LocationSearchField = () => {
 
             return (
                 <li
-                    className="group cursor-pointer shadow-md hover:shadow-blue-500/60 rounded-md p-0.5 transition duration-500"
-                    onClick={() => handleFetchWeatherData(display_place)}
+                    className="shadow-md hover:shadow-blue-500/60 rounded-md p-0.5 transition duration-500 "
                     key={place_id}
                 >
-                    <p className="text-sm font-bold group-hover:decoration-blue-500/50 truncate">
-                        {display_place}
-                    </p>
-                    <p className="text-xs text-gray/80 truncate">
-                        {display_address}
-                    </p>
+                    <button
+                        className="cursor-pointer block w-full"
+                        onClick={() => handleFetchWeatherData(display_place)}
+                        aria-label={`Fetch weather data for ${display_place}`}
+                    >
+                        <p className="text-sm font-bold truncate">
+                            {display_place}
+                        </p>
+                        <p className="text-xs text-gray/80 truncate">
+                            {display_address}
+                        </p>
+                    </button>
                 </li>
             );
         });
@@ -100,8 +105,10 @@ const LocationSearchField = () => {
             <div className="flex items-center">
                 <MdOutlinePlace className="absolute left-9 text-lg" />
                 <input
-                    className="pl-5 pr-12 py-0.5 w-full focus:outline-0"
+                    className="pl-5 pr-12 py-0.5 w-full focus:outline-0 placeholder:text-xs ml-0.5"
                     type="text"
+                    placeholder="Enter your location"
+                    aria-placeholder="Enter your location"
                     value={searchValue}
                     onChange={handleSearchValue}
                 />
