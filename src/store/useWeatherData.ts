@@ -62,6 +62,9 @@ interface IWeatherStore {
     loading: boolean;
     error: string | null;
     locationName: string | null;
+    savedLocations: string[];
+    getSavedLocations: () => void;
+    setAddOrRemoveLocation: (locationName: string) => void;
     fetchWeatherData: (location?: string) => Promise<void>;
 }
 
@@ -117,7 +120,7 @@ const getCurrentPosition = (): Promise<GeolocationPosition> => {
 
 const getLocationName = async (lat: number, lon: number): Promise<string> => {
     const response = await fetch(
-        `https://us1.locationiq.com/v1/reverse?key=${API_KEY}=${lat}&lon=${lon}&format=json&accept-language=en`
+        `https://us1.locationiq.com/v1/reverse?key=${API_KEY}&lat=${lat}&lon=${lon}&format=json&accept-language=en`
     );
 
     if (!response.ok) {
@@ -141,6 +144,34 @@ const useWeatherData = create<IWeatherStore>((set) => ({
     loading: false,
     error: null,
     locationName: null,
+    savedLocations: [],
+    getSavedLocations: () => {
+        const savedLocations: string[] = JSON.parse(
+            localStorage.getItem('locations') || '[]'
+        );
+
+        set({ savedLocations });
+    },
+    setAddOrRemoveLocation: (locationName: string) => {
+        set((state) => {
+            const savedLocations = state.savedLocations;
+
+            if (savedLocations.includes(locationName)) {
+                const filteredLocations = savedLocations.filter(
+                    (location) => location !== locationName
+                );
+                localStorage.setItem(
+                    'locations',
+                    JSON.stringify(filteredLocations)
+                );
+                return { savedLocations: filteredLocations };
+            } else {
+                const newLocations = [...savedLocations, locationName];
+                localStorage.setItem('locations', JSON.stringify(newLocations));
+                return { savedLocations: newLocations };
+            }
+        });
+    },
     fetchWeatherData: async (location: string | undefined) => {
         set({ loading: true, error: null });
 
@@ -218,5 +249,11 @@ export const selectWeatherLoading = (state: IWeatherStore) => state.loading;
 export const selectWeatherError = (state: IWeatherStore) => state.error;
 export const selectWeatherLocationName = (state: IWeatherStore) =>
     state.locationName;
+export const selectSavedLocations = (state: IWeatherStore) =>
+    state.savedLocations;
+export const selectGetSavedLocations = (state: IWeatherStore) =>
+    state.getSavedLocations;
+export const selectSetAddOrRemoveLocation = (state: IWeatherStore) =>
+    state.setAddOrRemoveLocation;
 
 export default useWeatherData;

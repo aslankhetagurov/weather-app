@@ -2,6 +2,7 @@ import logo from '../../../../assets/logo.png';
 import CurrentDayTemp from '../CurrentDayTemp/CurrentDayTemp';
 import DailyWeatherList from '../DailyWeatherList/DailyWeatherList';
 import LocationSearchField from '../LocationSearchField/LocationSearchField';
+import SavedLocationsList from '../SavedLocationsList/SavedLocationsList';
 
 export const WeatherSidebar = () => {
     return (
@@ -10,11 +11,14 @@ export const WeatherSidebar = () => {
                 <img
                     className="mb-2.5 max-w-18"
                     src={logo}
-                    alt="Weathery logo"
+                    alt="Weather app logo"
                 />
                 <h1 className="font-bold text-3xl self-center">Weathery</h1>
             </header>
-            <LocationSearchField />
+            <div className="gap-2.5 flex items-center relative border-b-1 border-white/20 mb-1">
+                <SavedLocationsList />
+                <LocationSearchField />
+            </div>
             <CurrentDayTemp />
             <DailyWeatherList />
         </section>
