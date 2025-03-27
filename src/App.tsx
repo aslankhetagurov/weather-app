@@ -18,7 +18,13 @@ function App() {
     const getSavedLocations = useWeatherData(selectGetSavedLocations);
 
     useEffect(() => {
-        fetchWeatherData();
+        const lastLocation = localStorage.getItem('lastLocation');
+        const savedLocations: string[] = JSON.parse(
+            localStorage.getItem('locations') || '[]'
+        );
+        lastLocation && savedLocations.includes(lastLocation)
+            ? fetchWeatherData(lastLocation)
+            : fetchWeatherData();
         getSavedLocations();
     }, []);
 

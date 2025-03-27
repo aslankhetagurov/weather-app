@@ -204,6 +204,8 @@ const useWeatherData = create<IWeatherStore>((set) => ({
                     weatherData,
                     locationName: location,
                 });
+
+                localStorage.setItem('lastLocation', location);
             } else if (navigator.geolocation) {
                 try {
                     const geoData = await getCurrentPosition();
@@ -221,6 +223,8 @@ const useWeatherData = create<IWeatherStore>((set) => ({
                     );
 
                     set({ loading: false, weatherData, locationName });
+
+                    localStorage.setItem('lastLocation', locationName);
                 } catch (error) {
                     if (error instanceof GeolocationPositionError) {
                         geolocationError(error, set);
