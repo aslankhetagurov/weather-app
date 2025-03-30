@@ -22,7 +22,7 @@ const WeatherDetails = () => {
     const windDirection = current.wind_direction_10m;
     const windSpeed = current.wind_speed_10m;
     const weatherCode = current.weather_code;
-    const timeZone = weatherData.timeZone;
+    const timezone = weatherData.timezone;
     const uv = daily.uv_index_max[0];
     const sunrise = daily.sunrise[0];
     const sunset = daily.sunset[0];
@@ -37,7 +37,7 @@ const WeatherDetails = () => {
                 sunIconRef,
                 sunrise,
                 sunset,
-                timeZone
+                timezone
             ),
         [sunrise, sunset]
     );

@@ -25,5 +25,8 @@ export const updateSunPosition = (
         sunProgressPercentage > 100 ? 100 : sunProgressPercentage;
 
     sunLineRef.current.style.background = `linear-gradient(to right, white -15%, gold ${sunProgressPercentageMAX}%, white ${sunProgressPercentageMAX}%)`;
-    sunIconRef.current.style.left = `calc(${sunProgressPercentageMAX}% - 12px)`;
+
+    sunProgressPercentageMAX < 0
+        ? (sunIconRef.current.style.display = 'none')
+        : (sunIconRef.current.style.left = `calc(${sunProgressPercentageMAX}% - 12px)`);
 };
