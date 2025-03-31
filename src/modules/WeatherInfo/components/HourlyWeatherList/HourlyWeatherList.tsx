@@ -41,7 +41,7 @@ const HourlyWeatherList = () => {
         ));
 
     return (
-        <div className="flex gap-2 mt-auto pt-4 border-t-1 border-white/40">
+        <div className="flex gap-2 mt-auto pt-2.5 border-t-1 border-white/40">
             <ul
                 ref={sliderRef}
                 className="flex gap-2 overflow-x-scroll hide-scrollbar cursor-ew-resize"
