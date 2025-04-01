@@ -27,7 +27,7 @@ const CurrentDateAndTime = () => {
     const [date, time] = dateAndTime;
 
     return (
-        <div className="font-bold text-left flex items-center">
+        <div className="flex items-center font-bold text-left">
             <span className="pr-2.5 mr-2.5 border-r-1 border-r-gray-300">
                 {date}
             </span>

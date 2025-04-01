@@ -45,8 +45,8 @@ const WeatherDetails = () => {
     );
 
     return (
-        <div className="h-full py-2.5 flex flex-col gap-3 font-bold">
-            <div className="grid grid-cols-[120px_120px] grid-rows-[120px_120px] gap-2.5">
+        <div className="flex flex-col gap-3 h-full sm:py-2.5 font-bold">
+            <div className="grid grid-cols-2 grid-rows-2 sm:grid-cols-[120px_120px] sm:grid-rows-[120px_120px] gap-2.5">
                 <div className="details-square-item">
                     <h6 className="details-square-item__title">
                         Humidity
@@ -93,13 +93,13 @@ const WeatherDetails = () => {
                 </div>
             </div>
 
-            <div className="details-item gap-2">
+            <div className="details-item gap-2 sm:w-fit">
                 <span className="flex items-center gap-1">
                     {getDateAndTime(sunrise)[1]}
                     <FiSunrise className="text-xl" />
                 </span>
                 <span
-                    className="w-40 h-0.5 bg-white/50 mx-1 rounded-sm relative flex items-center"
+                    className="min-w-[calc(100%-150px)] sm:min-w-32 md:w-40 h-0.5 bg-white/50 mx-1 rounded-sm relative flex items-center"
                     ref={sunLineRef}
                 >
                     <span
@@ -115,7 +115,7 @@ const WeatherDetails = () => {
                 </span>
             </div>
 
-            <p className="text-start text-5xl font-bold backdrop-blur-3xl backdrop-brightness-99 bg-[#ffffff40] rounded-md overflow-hidden w-max px-2.5">
+            <p className="hidden sm:block text-start text-lg sm:text-2xl md:text-3xl lg:text-5xl font-bold backdrop-blur-3xl backdrop-brightness-99 bg-[#ffffff40] rounded-md overflow-hidden w-max px-2.5">
                 {WEATHER_CODES[weatherCode].toUpperCase()}
             </p>
         </div>

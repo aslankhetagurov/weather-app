@@ -80,7 +80,7 @@ const LocationSearchField = () => {
 
             return (
                 <li
-                    className="shadow-md hover:shadow-blue-500/60 rounded-md p-0.5 transition duration-500 "
+                    className="shadow-md hover:shadow-blue-500/60 rounded-md p-0.5 transition duration-500"
                     key={place_id}
                 >
                     <button
@@ -129,7 +129,7 @@ const LocationSearchField = () => {
             ) : (
                 locationList &&
                 searchValue && (
-                    <ul className="absolute w-full opacity-0 invisible group-focus-within:opacity-100 group-focus-within:visible flex flex-col gap-3 px-1.5 py-2.5 rounded-b-sm bg-white/95 text-gray-500 transition-all duration-400 max-w-[230px] mx-auto left-0">
+                    <ul className="absolute w-full opacity-0 invisible group-focus-within:opacity-100 group-focus-within:visible flex flex-col gap-3 px-1.5 py-2.5 rounded-b-sm bg-white/95 text-gray-500 transition-all duration-400 sm:max-w-[230px] mx-auto left-0 z-30">
                         {locationListRender()}
                     </ul>
                 )

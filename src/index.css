@@ -25,7 +25,6 @@ body {
   backdrop-filter: blur(70px) brightness(99%);
   background-color: #ffffff40;
   color: #fff;
-  width: max-content;
   border-radius: 6px;
   height: 30px;
   overflow: hidden;
@@ -47,4 +46,11 @@ body {
   color: #f3f4f6;
   font-size: 14px;
   font-weight: 400;
+}
+
+@media (max-width:640px) {
+  .details-square-item__title {
+    justify-content: center;
+    column-gap: 10px;
+  }
 }

@@ -1,4 +1,6 @@
 import logo from '../../../../assets/logo.png';
+import HourlyWeatherList from '../../../WeatherInfo/components/HourlyWeatherList/HourlyWeatherList';
+import WeatherDetails from '../../../WeatherInfo/components/WeatherDetails/WeatherDetails';
 import CurrentDayTemp from '../CurrentDayTemp/CurrentDayTemp';
 import DailyWeatherList from '../DailyWeatherList/DailyWeatherList';
 import LocationSearchField from '../LocationSearchField/LocationSearchField';
@@ -6,8 +8,8 @@ import SavedLocationsList from '../SavedLocationsList/SavedLocationsList';
 
 export const WeatherSidebar = () => {
     return (
-        <section className="min-w-68 max-w-68 backdrop-blur-lg h-full border-1 rounded-2xl border-white/30 px-5 py-1">
-            <header className="flex max-w-9/10 mx-auto">
+        <section className="sm:min-w-68 sm:max-w-68 sm:backdrop-blur-lg h-full sm:border-1 sm:rounded-2xl border-white/30 sm:px-5 sm:py-1">
+            <header className="flex justify-center max-w-9/10 mx-auto mb-5 sm:mb-0">
                 <img
                     className="mb-2.5 max-w-18"
                     src={logo}
@@ -20,7 +22,16 @@ export const WeatherSidebar = () => {
                 <LocationSearchField />
             </div>
             <CurrentDayTemp />
+
+            <div className="block sm:hidden">
+                <HourlyWeatherList />
+            </div>
+
             <DailyWeatherList />
+
+            <div className="block sm:hidden shadow-[0_0_10px_rgba(255,255,255,0.9)] p-3 rounded-lg backdrop-blur-lg sm:backdrop-blur-none">
+                <WeatherDetails />
+            </div>
         </section>
     );
 };

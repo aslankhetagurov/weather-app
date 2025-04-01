@@ -10,6 +10,7 @@ import useWeatherData, {
     selectWeatherLocationName,
 } from '../../../../store/useWeatherData';
 import { formatTemp } from '../../../../helpers/formatTemp';
+import { WEATHER_CODES } from '../../../../consts/weatherCodes';
 
 const CurrentDayTemp = () => {
     const weatherData = useWeatherData(selectWeatherData);
@@ -35,8 +36,11 @@ const CurrentDayTemp = () => {
         );
     }
 
-    const { temperature_2m: currentTemp, apparent_temperature: feelsLike } =
-        weatherData.current;
+    const {
+        temperature_2m: currentTemp,
+        apparent_temperature: feelsLike,
+        weather_code: weatherCode,
+    } = weatherData.current;
     const { temperature_2m_min: minTemp, temperature_2m_max: maxTemp } =
         weatherData.daily;
 
@@ -48,7 +52,10 @@ const CurrentDayTemp = () => {
     };
 
     return (
-        <div className="border-b-1 border-white/20 pb-1.5">
+        <div className="border-b-1 border-white/20 py-3.5 sm:py-0 sm:pb-1.5">
+            <p className="block sm:hidden text-2xl px-2.5 text-center text-gray-200">
+                {WEATHER_CODES[weatherCode].toUpperCase()}
+            </p>
             <div className="flex justify-center mb-2 gap-1">
                 <h3 className="text-5xl font-medium">
                     {formatTemp(currentTemp)}
@@ -73,7 +80,7 @@ const CurrentDayTemp = () => {
                     }
                 >
                     <FaStar
-                        className={`text-xl ${
+                        className={`text-2xl ${
                             isFavorite(locationName)
                                 ? 'text-amber-300'
                                 : 'text-white/50'

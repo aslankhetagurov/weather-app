@@ -7,4 +7,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow-y: hidden;
+}
+
+@media (max-width: 640px) {
+  .app {
+    padding: 15px;
+  }
 }

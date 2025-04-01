@@ -50,7 +50,7 @@ function App() {
                 <ErrorComp error={error} />
             ) : (
                 <div className="app">
-                    <div className="m-10 h-[calc(100vh-100px)] w-[calc(100%-100px)]  rounded-2xl border-white/10 shadow-[0_0_100px_rgba(255,255,255,0.95)]">
+                    <div className="w-full h-full sm:h-[calc(100vh-48px)] sm:w-[calc(100%-48px)] md:h-[calc(100vh-100px)] md:w-[calc(100%-100px)] sm:rounded-2xl sm:border-white/10 sm:shadow-[0_0_100px_rgba(255,255,255,0.95)]">
                         <MainPage />
                     </div>
                 </div>

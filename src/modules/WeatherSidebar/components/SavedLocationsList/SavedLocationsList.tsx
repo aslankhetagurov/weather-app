@@ -45,7 +45,7 @@ const SavedLocationsList = () => {
     };
 
     return (
-        <div className="group text-gray-500 rounded-sm self-start">
+        <div className="group text-gray-500 rounded-sm self-start z-20">
             <button
                 onClick={handleShowList}
                 className="text-2xl cursor-pointer bg-white/95 text-gray-500 self-start flex items-center justify-center rounded-t-xs"
@@ -69,9 +69,13 @@ const SavedLocationsList = () => {
                     <FaStar className="text-amber-300 text-lg" />
                     <span>Favorite Locations</span>
                 </h3>
-                <ul className="flex flex-col items-center gap-2.5">
-                    {renderLocations()}
-                </ul>
+                {savedLocations.length ? (
+                    <ul className="flex flex-col items-center gap-2.5">
+                        {renderLocations()}
+                    </ul>
+                ) : (
+                    <p>No favorite locations</p>
+                )}
             </div>
         </div>
     );
