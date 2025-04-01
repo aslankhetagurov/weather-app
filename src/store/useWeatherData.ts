@@ -241,7 +241,10 @@ const useWeatherData = create<IWeatherStore>((set) => ({
         } catch (error) {
             if (error instanceof Error) {
                 console.error(error);
-                set({ loading: false, error: error.message });
+                set({
+                    loading: false,
+                    error: `${error.message}. Please try again.`,
+                });
             }
         }
     },

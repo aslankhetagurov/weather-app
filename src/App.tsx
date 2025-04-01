@@ -4,11 +4,13 @@ import useWeatherData, {
     selectFetchWeatherData,
     selectGetSavedLocations,
     selectWeatherData,
+    selectWeatherError,
     selectWeatherLoading,
 } from './store/useWeatherData';
 import MainPage from './pages/MainPage';
 import Spinner from './UI/Spinner';
 import { selectBackgroundImage } from './helpers/selectBackgroundImage';
+import ErrorComp from './components/ErrorComp/ErrorComp';
 import './App.css';
 
 function App() {
@@ -16,6 +18,7 @@ function App() {
     const loading = useWeatherData(selectWeatherLoading);
     const fetchWeatherData = useWeatherData(selectFetchWeatherData);
     const getSavedLocations = useWeatherData(selectGetSavedLocations);
+    const error = useWeatherData(selectWeatherError);
 
     useEffect(() => {
         const lastLocation = localStorage.getItem('lastLocation');
@@ -43,6 +46,8 @@ function App() {
         >
             {loading ? (
                 <Spinner />
+            ) : error ? (
+                <ErrorComp error={error} />
             ) : (
                 <div className="app">
                     <div className="m-10 h-[calc(100vh-100px)] w-[calc(100%-100px)]  rounded-2xl border-white/10 shadow-[0_0_100px_rgba(255,255,255,0.95)]">
