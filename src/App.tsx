@@ -40,7 +40,7 @@ function App() {
             style={{
                 backgroundImage: `url(/assets/weatherImages/${backgroundImg})`,
             }}
-            className="bg-cover bg-no-repeat min-h-screen"
+            className="bg-cover bg-no-repeat bg-center min-h-screen"
             role="img"
             aria-label="Background showing weather"
         >
