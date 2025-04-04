@@ -60,7 +60,7 @@ const WeatherDetails = () => {
                         UVMax
                         <TbUvIndex className="text-2xl" />
                     </h6>
-                    <span className="text-3xl">{getUVLevel(uv)}</span>
+                    <span className="text-2xl">{getUVLevel(uv)}</span>
                 </div>
 
                 <div className="details-square-item">
