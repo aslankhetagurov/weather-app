@@ -101,7 +101,7 @@ const LocationSearchField = () => {
     };
 
     return (
-        <form className="group" onSubmit={handleSubmit}>
+        <form className="group w-full" onSubmit={handleSubmit}>
             <div className="flex items-center">
                 <MdOutlinePlace className="absolute left-9 text-lg" />
                 <input
@@ -123,7 +123,7 @@ const LocationSearchField = () => {
                 <RiSearch2Line className="absolute right-0.5" />
             </div>
             {error ? (
-                <p className="text-red-400 text-center absolute bg-white/95 rounded-b-sm p-2 left-0 max-w-[230px] right-0">
+                <p className="text-red-400 text-center absolute bg-white/95 rounded-b-sm p-2 left-0 sm:max-w-[230px] right-0">
                     {error}
                 </p>
             ) : (
