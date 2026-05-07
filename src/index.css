@@ -1,6 +1,22 @@
 @import "tailwindcss/preflight.css"layer(base);
 @import "tailwindcss";
 
+@font-face {
+  font-family: 'Quicksand';
+  src: url('/fonts/Quicksand-Regular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Quicksand';
+  src: url('/fonts/Quicksand-Bold.woff2') format('woff2');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
 body {
   font-family: "Quicksand", sans-serif;
   color: #fff;
@@ -23,7 +39,6 @@ body {
   display: flex;
   align-items: center;
   backdrop-filter: blur(70px) brightness(99%);
-  background-color: #ffffff40;
   color: #fff;
   border-radius: 6px;
   height: 30px;
@@ -32,10 +47,9 @@ body {
 }
 
 .details-square-item {
-  background-color: #ffffff40;
   backdrop-filter: blur(70px) brightness(99%);
-  padding: 5px;
-  border-radius: 5px;
+  padding: 10px;
+  border-radius: 15px;
   height: 100%;
 }
 
