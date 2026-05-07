@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { toast, Toaster } from 'sonner';
 
 import useWeatherData, {
     selectFetchWeatherData,
@@ -10,7 +11,6 @@ import useWeatherData, {
 import MainPage from './pages/MainPage';
 import Spinner from './UI/Spinner';
 import { selectBackgroundImage } from './helpers/selectBackgroundImage';
-import ErrorComp from './components/ErrorComp/ErrorComp';
 import './App.css';
 
 function App() {
@@ -21,13 +21,14 @@ function App() {
     const error = useWeatherData(selectWeatherError);
 
     useEffect(() => {
+        if (!error) return;
+        toast.error(error);
+    }, [error]);
+
+    useEffect(() => {
         const lastLocation = localStorage.getItem('lastLocation');
-        const savedLocations: string[] = JSON.parse(
-            localStorage.getItem('locations') || '[]'
-        );
-        lastLocation && savedLocations.includes(lastLocation)
-            ? fetchWeatherData(lastLocation)
-            : fetchWeatherData();
+        lastLocation ? fetchWeatherData(lastLocation) : fetchWeatherData();
+
         getSavedLocations();
     }, []);
 
@@ -40,14 +41,19 @@ function App() {
             style={{
                 backgroundImage: `url(/assets/weatherImages/${backgroundImg})`,
             }}
-            className="bg-cover bg-no-repeat bg-center min-h-screen"
+            className="bg-cover bg-no-repeat bg-center min-h-screen bg-fixed"
             role="img"
             aria-label="Background showing weather"
         >
+            <Toaster
+                position="top-center"
+                richColors
+                closeButton
+                duration={10000}
+            />
+
             {loading ? (
                 <Spinner />
-            ) : error ? (
-                <ErrorComp error={error} />
             ) : (
                 <div className="app">
                     <div className="w-full h-full sm:h-[calc(100vh-48px)] sm:w-[calc(100%-48px)] md:h-[calc(100vh-100px)] md:w-[calc(100%-100px)] sm:rounded-2xl sm:border-white/10 sm:shadow-[0_0_100px_rgba(255,255,255,0.95)]">

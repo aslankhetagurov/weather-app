@@ -1,12 +1,9 @@
-import { ImSpinner9 } from 'react-icons/im';
 import { FaStar } from 'react-icons/fa';
 
 import useWeatherData, {
     selectSavedLocations,
     selectSetAddOrRemoveLocation,
     selectWeatherData,
-    selectWeatherError,
-    selectWeatherLoading,
     selectWeatherLocationName,
 } from '../../../../store/useWeatherData';
 import { formatTemp } from '../../../../helpers/formatTemp';
@@ -14,27 +11,11 @@ import { WEATHER_CODES } from '../../../../consts/weatherCodes';
 
 const CurrentDayTemp = () => {
     const weatherData = useWeatherData(selectWeatherData);
-    const weatherLoading = useWeatherData(selectWeatherLoading);
-    const weatherErrorMessage = useWeatherData(selectWeatherError);
     const locationName = useWeatherData(selectWeatherLocationName);
     const savedLocations = useWeatherData(selectSavedLocations);
     const setAddOrRemoveLocation = useWeatherData(selectSetAddOrRemoveLocation);
 
-    if (weatherLoading) {
-        return <ImSpinner9 className="animate-spin size-5 my-5 mx-auto " />;
-    }
-
-    if (weatherErrorMessage) {
-        return <p className="text-red-400 font-bold">{weatherErrorMessage}</p>;
-    }
-
-    if (!weatherData || !locationName) {
-        return (
-            <p className="text-red-400 font-bold">
-                Failed to load temperature data. Please try again later.
-            </p>
-        );
-    }
+    if (!weatherData || !locationName) return null;
 
     const {
         temperature_2m: currentTemp,

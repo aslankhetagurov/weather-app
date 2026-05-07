@@ -3,10 +3,10 @@ import { WeatherInfo } from '../modules/WeatherInfo';
 
 const MainPage = () => {
     return (
-        <div className="h-full sm:flex">
+        <main className="h-full sm:flex">
             <WeatherSidebar />
             <WeatherInfo />
-        </div>
+        </main>
     );
 };
 
