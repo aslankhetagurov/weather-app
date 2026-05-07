@@ -1,4 +1,3 @@
-import logo from '../../../../assets/logo.png';
 import HourlyWeatherList from '../../../WeatherInfo/components/HourlyWeatherList/HourlyWeatherList';
 import WeatherDetails from '../../../WeatherInfo/components/WeatherDetails/WeatherDetails';
 import CurrentDayTemp from '../CurrentDayTemp/CurrentDayTemp';
@@ -12,8 +11,13 @@ export const WeatherSidebar = () => {
             <header className="flex justify-center max-w-9/10 mx-auto mb-5 sm:mb-0">
                 <img
                     className="mb-2.5 max-w-18"
-                    src={logo}
+                    src="/logo.png"
                     alt="Weather app logo"
+                    fetchPriority="high"
+                    decoding="async"
+                    loading="eager"
+                    width={72}
+                    height={47}
                 />
                 <h1 className="font-bold text-3xl self-center">Weathery</h1>
             </header>
@@ -29,7 +33,7 @@ export const WeatherSidebar = () => {
 
             <DailyWeatherList />
 
-            <div className="block sm:hidden shadow-[0_0_10px_rgba(255,255,255,0.9)] p-3 rounded-lg backdrop-blur-lg sm:backdrop-blur-none">
+            <div className="block sm:hidden p-3 rounded-lg  sm:backdrop-blur-none">
                 <WeatherDetails />
             </div>
         </section>
