@@ -33,7 +33,7 @@ export const WeatherSidebar = () => {
 
             <DailyWeatherList />
 
-            <div className="block sm:hidden p-3 rounded-lg  sm:backdrop-blur-none">
+            <div className="block sm:hidden rounded-lg sm:backdrop-blur-none">
                 <WeatherDetails />
             </div>
         </section>

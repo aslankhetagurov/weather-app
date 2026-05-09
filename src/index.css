@@ -38,19 +38,21 @@ body {
 .details-item {
   display: flex;
   align-items: center;
-  backdrop-filter: blur(70px) brightness(99%);
+  backdrop-filter: blur(10px);
   color: #fff;
-  border-radius: 6px;
+  border-radius: 8px;
   height: 30px;
   overflow: hidden;
   padding: 2px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .details-square-item {
-  backdrop-filter: blur(70px) brightness(99%);
+  backdrop-filter: blur(10px);
   padding: 10px;
-  border-radius: 15px;
+  border-radius: 8px;
   height: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .details-square-item__title {

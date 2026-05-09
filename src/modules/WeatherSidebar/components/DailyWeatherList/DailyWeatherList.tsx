@@ -20,7 +20,7 @@ const DailyWeatherList = () => {
 
     return (
         weatherData && (
-            <div className="shadow-[0_0_10px_rgba(255,255,255,0.9)] sm:shadow-none p-3 sm:p-0 rounded-lg sm:rounded-none my-7 sm:my-0 backdrop-blur-lg sm:backdrop-blur-none">
+            <div className="border border-white/20 p-3 sm:border-none sm:p-0 rounded-lg sm:rounded-none my-7 sm:my-0 backdrop-blur-lg sm:backdrop-blur-none">
                 <h2 className="sm:mt-5 mb-4 font-bold">
                     The Next 7 Days Forecast
                 </h2>
