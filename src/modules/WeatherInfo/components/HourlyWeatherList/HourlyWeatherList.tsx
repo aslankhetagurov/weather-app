@@ -7,11 +7,7 @@ import HourlyWeatherItem from '../HourlyWeatherItem/HourlyWeatherItem';
 
 const HourlyWeatherList = () => {
     const weatherData = useWeatherData(selectWeatherData);
-    if (!weatherData) return null;
-
-    const { hourly } = weatherData;
     const sliderRef = useRef<HTMLUListElement | null>(null);
-    const pastHours = new Date(Date.parse(weatherData.current.time)).getHours();
 
     useEffect(() => {
         const slider = sliderRef.current;
@@ -28,6 +24,11 @@ const HourlyWeatherList = () => {
             slider.removeEventListener('wheel', handleWheel);
         };
     }, []);
+
+    if (!weatherData) return null;
+
+    const { hourly } = weatherData;
+    const pastHours = new Date(Date.parse(weatherData.current.time)).getHours();
 
     const hourlyItems = hourly.time
         .slice(pastHours, 24 + pastHours) // always display the next 24 hours starting from the current hour
