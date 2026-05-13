@@ -37,14 +37,15 @@ function App() {
     const backgroundImg = selectBackgroundImage(weatherCode, isDay);
 
     return (
-        <div
-            style={{
-                backgroundImage: `url(/assets/weatherImages/${backgroundImg})`,
-            }}
-            className="bg-cover bg-no-repeat bg-center min-h-screen bg-fixed"
-            role="img"
-            aria-label="Background showing weather"
-        >
+        <>
+            <div
+                style={{
+                    backgroundImage: `url(/assets/weatherImages/${backgroundImg})`,
+                }}
+                className="bg-cover bg-no-repeat bg-center min-h-screen inset-0 fixed -z-10"
+                role="img"
+                aria-label="Background showing weather"
+            />
             <Toaster
                 position="top-center"
                 richColors
@@ -61,7 +62,7 @@ function App() {
                     </div>
                 </div>
             )}
-        </div>
+        </>
     );
 }
 
