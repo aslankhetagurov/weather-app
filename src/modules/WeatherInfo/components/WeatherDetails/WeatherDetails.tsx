@@ -31,7 +31,7 @@ const WeatherDetails = () => {
                 sunIconRef,
                 weatherData.daily.sunrise[0],
                 weatherData.daily.sunset[0],
-                weatherData.timezone,
+                weatherData.timezone
             );
         }
     }, [weatherData]);
@@ -139,8 +139,8 @@ const WeatherDetails = () => {
                 </div>
             )}
 
-            <p className="hidden sm:block text-start text-lg sm:text-2xl md:text-3xl lg:text-5xl font-bold backdrop-blur-3xl rounded-md overflow-hidden w-max px-2.5">
-                {WEATHER_CODES[weatherCode]?.toUpperCase() ?? ''}
+            <p className="hidden sm:block text-start text-lg sm:text-2xl md:text-3xl lg:text-5xl font-bold backdrop-blur-sm rounded-lg overflow-hidden w-max px-2.5 border border-white/20">
+                {WEATHER_CODES[weatherCode]?.toUpperCase()}
             </p>
         </div>
     );
