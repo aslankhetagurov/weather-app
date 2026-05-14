@@ -4,7 +4,7 @@ const Spinner = () => {
             <div className="relative flex items-center justify-center">
                 <img
                     className="max-w-28 mt-3.5"
-                    src="/logo.png"
+                    src="/logo.webp"
                     alt="Weathery app logo"
                     fetchPriority="high"
                     decoding="async"

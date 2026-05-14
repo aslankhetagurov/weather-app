@@ -11,7 +11,7 @@ export const WeatherSidebar = () => {
             <header className="flex justify-center max-w-9/10 mx-auto mb-5 sm:mb-0">
                 <img
                     className="mb-2.5 max-w-18"
-                    src="/logo.png"
+                    src="/logo.webp"
                     alt="Weather app logo"
                     fetchPriority="high"
                     decoding="async"
